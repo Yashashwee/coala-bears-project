@@ -52,7 +52,7 @@ class TextLintBear:
     CAN_DETECT = {'Formatting', 'Grammar', 'Spelling'}
     SEE_MORE = 'https://github.com/textlint/textlint'
 
-    @staticmethod
+    @ staticmethod
     def generate_config(filename, file,
                         check_todos: bool = None,
                         dont_start_with_duplicated_conjunction: bool = True,
@@ -232,7 +232,7 @@ class TextLintBear:
 
             return json.dumps(parent_config)
 
-    @staticmethod
+    @ staticmethod
     def create_arguments(filename, file, config_file,
                          textlint_config: str = '',
                          ):
