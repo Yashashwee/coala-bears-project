@@ -1,0 +1,24 @@
+// A bunch of words
+?start: (exp ["\n"]*)+				
+
+DIGIT: "0".."9"
+HEXDIGIT: "a".."f"|"A".."F"|DIGIT
+case: exp | exp "->" exp
+match:"match" var ["," var]* "with" case+
+INT: DIGIT+
+comment:"(*" word+ "*)"
+let:"let" [rec] fvar var* "=" exp
+var: WORD[INT]
+fvar: WORD[INT]
+bool: "true"|"false"
+rec: "rec"
+exp: comment| let ";;"| INT | match | var | fvar | bool
+// Allow optional punctuation after each word
+word: WORD ["," | "!"]
+
+// imports WORD from library
+%import common.WORD   
+
+// Disregard spaces in text
+%ignore " "
+%ignore "\n"           
