@@ -7,8 +7,9 @@ case: exp | exp "->" exp
 match:"match" var ["," var]* "with" case ["|" case]+
 INT: DIGIT+
 comment:"(*" word+ "*)"
+equal: "="
 inkey:"in"
-let:"let" [rec] fvar var* "=" exp+ [inkey|";;"]
+let:"let" [rec] fvar var* equal exp+ [inkey|";;"]
 var: /[a-z][a-zA-Z0-9]*/
 fvar: /[a-z][a-zA-Z0-9]*/
 bool: "true"|"false"
@@ -22,7 +23,7 @@ binop: var operators var | var operators INT | INT operators var | INT operators
 intarith: binop | binop operators binop | INT
 err: CAPITAL
 raise: "raise" err
-appf: fvar var+
+appf:fvar var+
 exp: comment| let | match | var | fvar | bool | intarith|appf
 // Allow optional punctuation after each word
 word: WORD ["," | "!"]
