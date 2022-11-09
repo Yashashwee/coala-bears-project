@@ -44,12 +44,12 @@ word: WORD ["," | "!"]
    
 
 """)
-try:
-    parsedTree = l.parse(
-        "let fun3 x y = let newX fun x in match newX with 10->20|1000->1000")
-    print(parsedTree.pretty())
-except:
-    print(failed)
+# try:
+#     parsedTree = l.parse(
+#         "let fun3 x y = let newX fun x in match newX with 10->20|1000->1000")
+#     print(parsedTree.pretty())
+# except:
+#     print(failed)
 
 
 class OtherBear(LocalBear):
@@ -62,7 +62,17 @@ class OtherBear(LocalBear):
         :param language: Programming language of the source code written.
 
         """
-        yield HiddenResult(self, ["Some Content", "Some Other Content"])
+        data = ""
+
+        for line_no, line in enumerate(file):
+            data = data + line
+
+        try:
+            parsed_tree = l.parse(data)
+            yield Result.from_values(origin=self,message='Following is parsed tree:\n {}'.format(parsed_tree.pretty()),file=filename)
+        
+        except:
+            yield Result.from_values(origin=self,message='Cannot Parse the code',file=filename)
 
 
 # from coalib.bears.LocalBear import LocalBear
