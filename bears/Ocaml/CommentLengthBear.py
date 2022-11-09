@@ -9,7 +9,7 @@ class comment_length_checker(LocalBear):
     AUTHORS_EMAILS={'avatsal38@gmail.com'}
     MAINTAINERS={'VYD'}
     MAINTAINERS_EMAILS = {'avatsal38@gmail.com'}
-    CAN_DETECT={}
+    CAN_DETECT={'Formatting'}
 
     def run(self,filename,file,mw: int=80,language: language=Language['Ocaml']):
 
