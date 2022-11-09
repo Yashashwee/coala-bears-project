@@ -1,4 +1,6 @@
-?start: (exp ["\n"]*)+				
+from lark import Lark
+
+l = Lark(r"""?start: (exp ["\n"]*)+				
 
 DIGIT: "0".."9"
 HEXDIGIT: "a".."f"|"A".."F"|DIGIT
@@ -33,3 +35,12 @@ word: WORD ["," | "!"]
 // Disregard spaces in text
 %ignore " "
 %ignore "\n"   
+   
+
+""")
+try:
+    parsedTree = l.parse(
+        "let fun3 x y = let newX fun x in match newX with 10->20|1000->1000")
+    print(parsedTree.pretty())
+except:
+    print(failed)
