@@ -71,7 +71,7 @@ class OtherBear(LocalBear):
         print(data)
         try:
             parsed_tree = l.parse(data)
-            yield Result.from_values(origin=self, message='Following is parsed tree:\n {}'.format(parsed_tree.pretty()), file=filename)
+            yield Result.from_values(origin=self, message='Following is parsed tree:\n {}'.format(parsed_tree.pretty()), file=filename, severity=RESULT_SEVERITY.NORMAL)
 
         except:
             yield Result.from_values(origin=self, message='Cannot Parse the code', file=filename, severity=RESULT_SEVERITY.NORMAL)
