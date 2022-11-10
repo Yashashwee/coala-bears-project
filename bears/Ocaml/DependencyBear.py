@@ -54,7 +54,7 @@ class DependencyBear(LocalBear):
             for k in range(len(extra_matched)):
                 res.append(list(extra_matched[k])[1])
 
-            print("res = ", res)
+            # print("res = ", res)
             for i in regoriginal:
                 x = re.findall(i, line)
                 if(not(len(x) == 0)):
