@@ -24,8 +24,8 @@ class OcamlLintBear:
     REQUIREMENTS = {
         AnyOneOfRequirements(
             [
-             DistributionRequirement(apt_get='opam'),
-             ],
+                DistributionRequirement(apt_get='opam'),
+            ],
         ),
     }
     AUTHORS = {'Dhananjay Kumar Jha'}

@@ -5,6 +5,7 @@ from coalib.settings.Setting import language
 from coalib.bearlib.languages.Language import Language
 from lark import Lark
 from lark import Transformer
+from lark import Visitor
 from coalib.results.RESULT_SEVERITY import RESULT_SEVERITY
 from coalib.results.Diff import Diff
 
@@ -53,6 +54,10 @@ word: WORD ["," | "!"]
 #     print(parsedTree.pretty())
 # except:
 #     print(failed)
+
+
+class Trasnf(Transformer):
+    def let()
 
 
 class TokenBear(LocalBear):
