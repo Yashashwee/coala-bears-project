@@ -45,7 +45,7 @@ class StringRepChecker(LocalBear):
                     st = st + ",".join(res[x]) + "), ("
                 st = st + ",".join(res[l-1]) +")."
 
-                yield Result.from_values(origin=self,message='Strings badly represented on line_number {}'+'({current})'.format(line_no,current=st),
+                yield Result.from_values(origin=self,message='Strings badly represented on line_number {num}'.format(num = line_no)+'({current})'.format(current=st),
                     file=filename
                 )
 

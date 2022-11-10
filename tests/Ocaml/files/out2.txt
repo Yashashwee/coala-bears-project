@@ -1,0 +1,31 @@
+exp
+  let
+    None
+    fvar	fun3
+    var	x
+    var	y
+    exp
+      let
+        None
+        fvar	newX
+        exp
+          appf
+            fvar	fun
+            var	x
+            var	in
+        exp
+          match
+            var	newX
+            None
+            case
+              exp
+                intarith	10
+              exp
+                intarith	20
+            case
+              exp
+                intarith	1000
+              exp
+                intarith	1000
+        None
+    None
