@@ -20,6 +20,10 @@ import os
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 sys.path.insert(0, os.path.abspath('../'))
+sys.path.insert(0, os.path.abspath('../bears/Ocaml'))
+sys.path.insert(0, os.path.abspath('../tests/Ocaml'))
+
+
 
 # Import for version information
 from bears.Constants import VERSION
@@ -32,8 +36,16 @@ from bears.Constants import VERSION
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = [
-    'sphinx.ext.autodoc',
+extensions = ['sphinx.ext.autodoc'
+,'sphinx.ext.doctest'
+,'sphinx.ext.intersphinx'
+,'sphinx.ext.todo'
+,'sphinx.ext.coverage'
+,'sphinx.ext.mathjax'
+,'sphinx.ext.ifconfig'
+,'sphinx.ext.viewcode'
+,'sphinx.ext.githubpages'
+,'sphinx.ext.napoleon'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -69,7 +81,7 @@ release = VERSION
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language ='Ocaml'
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
