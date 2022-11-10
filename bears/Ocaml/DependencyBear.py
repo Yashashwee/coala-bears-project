@@ -3,12 +3,9 @@ from coalib.bears.LocalBear import LocalBear
 from coalib.results.Result import Result
 from coalib.settings.Setting import language
 from coalib.bearlib.languages.Language import Language
-# from bears.Ocaml.RemoveComments import (RemoveComments)
-from bears.Ocaml.RemoveComments import (RemoveComments)
 
 
 class DependencyBear(LocalBear):
-    BEAR_DEPS = {RemoveComments}
     LANGUAGES = {'Ocaml'}
     AUTHORS = {'VYD'}
     AUTHORS_EMAILS = {'avatsal38@gmail.com'}
@@ -16,16 +13,15 @@ class DependencyBear(LocalBear):
     MAINTAINERS_EMAILS = {'avatsal38@gmail.com'}
     CAN_DETECT = {'Extra string operations'}
 
-    def run(self, filename, file, dependency_results, language: language = Language['Ocaml']):
+    def run(self, filename, file, language: language = Language['Ocaml']):
         """
 
         Give result for undeclared function of lists.
-
         :param language: Programming language of the source code written.
-
         """
         flag = 0
         regExpfun = r"(let)(\s)([a-zA-Z]+)"
+        regExp2Fun = r"(\.)([^\n\s]+)"
         regoriginal = [r"[^\.]*(length)", r"[^\.]*(compare_lengths)",
                        r"[^\.]*(cons)", r"[^\.]*(compare_length_with)",
                        r"[^\.]*(hd)", r"[^\.]*(tl)",
@@ -39,8 +35,6 @@ class DependencyBear(LocalBear):
                        r"[^\.]*(filter)", r"[^\.]*(fold_right2)"]
 
         # iterating on all the lines in the ocaml src code file
-        results = dependency_results
-        # print(results)
         res = []
         errors = []
         final = ""
@@ -50,13 +44,17 @@ class DependencyBear(LocalBear):
             # print("line = ",line)
 
             fun_matched = re.findall(regExpfun, line)
+            extra_matched = re.findall(regExp2Fun, line)
 
             # print("fun_matched = ", fun_matched)
             l = len(fun_matched)
             for j in range(l):
                 res.append(list(fun_matched[j])[2])
 
-            # print("res = ", res)
+            for k in range(len(extra_matched)):
+                res.append(list(extra_matched[k])[1])
+
+            print("res = ", res)
             for i in regoriginal:
                 x = re.findall(i, line)
                 if(not(len(x) == 0)):
