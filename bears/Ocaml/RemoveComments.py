@@ -10,12 +10,16 @@ def commentStartInLine(line):
     for i in range(len(line)-1):
         if line[i] == "(" and line[i+1] == "*":
             return True, i
+        else:
+            False, -1
 
 
 def commentEndInLine(line):
     for i in range(len(line)-1):
         if line[i] == "*" and line[i+1] == ")":
             return True, i
+        else:
+            False, -1
 
 
 class RemoveComments(LocalBear):
