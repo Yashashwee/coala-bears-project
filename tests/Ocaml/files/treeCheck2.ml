@@ -1,0 +1,1 @@
+let fun3 x y = let newX = fun x in match newX with 10->20|1000->1000

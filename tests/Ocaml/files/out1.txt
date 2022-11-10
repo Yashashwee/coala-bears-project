@@ -1,0 +1,39 @@
+exp
+  let
+    rec
+    fvar	newVAl
+    var	x
+    exp
+      let
+        None
+        fvar	x1
+        exp
+          appf
+            fvar	fun
+            var	x
+            var	in
+        exp
+          let
+            None
+            fvar	x2
+            exp
+              appf
+                fvar	fun2
+                var	x
+                var	in
+            exp
+              match
+                var	x
+                None
+                case
+                  exp
+                    var	x1
+                  exp
+                    intarith	100
+                case
+                  exp
+                    var	x2
+                  exp
+                    intarith	1000
+            None
+        None
