@@ -391,8 +391,8 @@ required.remove('-r bear-requirements.txt')
 test_required = read_requirements('test-requirements.txt')
 
 filename = os.path.join(__dir__, 'README.rst')
-with open(filename) as readme:
-    long_description = readme.read()
+#with open(filename) as readme:
+    #long_description = readme.read()
 
 extras_require = None
 EXTRAS_REQUIRE = {}
@@ -423,16 +423,16 @@ if __name__ == '__main__':
     if pip_version < LooseVersion('9.0.1'):
         raise RuntimeError('Version of pip is less than 9.0.1. '
                            'Consider upgrading pip to pip~=9.0.1')
-    setup(name='coala-bears',
+    setup(name='vyd-coala-bears',
           version=VERSION,
           description=DESCRIPTION,
-          author='The coala developers',
-          author_email='coala-devel@googlegroups.com',
-          maintainer='Lasse Schuirmann, Fabian Neuschmidt, Mischa Kr\xfcger',
+          author='VYD',
+          author_email='avatsal38@gmail.com',
+          maintainer='vyd',
           maintainer_email=('lasse.schuirmann@gmail.com, '
                             'fabian@neuschmidt.de, '
                             'makman@alice.de'),
-          url='http://coala.io/',
+          url='https://github.com/Yashashwee/coala-bears-project',
           platforms='any',
           packages=find_packages(exclude=('build.*', 'tests', 'tests.*')),
           install_requires=required,
@@ -446,7 +446,7 @@ if __name__ == '__main__':
           license='AGPL-3.0',
           keywords=KEYWORDS,
           data_files=data_files,
-          long_description=long_description,
+          #long_description=long_description,
           entry_points={
               'coalabears': [
                   'coala_official_bears = bears',
