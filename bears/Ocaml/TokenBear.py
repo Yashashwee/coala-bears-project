@@ -60,8 +60,8 @@ class TokenBear(LocalBear):
     def run(self, filename, file, language: language = Language['Ocaml']):
         """
 
-        HelperBear to return tokens for a file
-
+        TokenBear hidden bear to return parse tokens and tree for a file
+        :filename: Name of the files to run the bear
         :param language: Programming language of the source code written.
 
         """

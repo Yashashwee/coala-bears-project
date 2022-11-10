@@ -63,8 +63,8 @@ class TokenOcamlBear(LocalBear):
     def run(self, filename, file, dependency_results, language: language = Language['Ocaml']):
         """
 
-        TokenOcamlBear to print the files for a file
-        :
+        TokenOcamlBear to print the dependency tree for a file
+        :dependency_results: The passed on contents from a different bear
         :param language: Programming language of the source code written.
 
         """
