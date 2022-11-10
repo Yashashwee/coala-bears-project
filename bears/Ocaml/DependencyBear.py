@@ -3,17 +3,34 @@ from coalib.bears.LocalBear import LocalBear
 from coalib.results.Result import Result
 from coalib.settings.Setting import language
 from coalib.bearlib.languages.Language import Language
+from bears.Ocaml.RemoveComments import (RemoveComments)
+
+
+def commentStartInLine(line):
+    for i in range(len(line)-1):
+        if line[i] == "(" and line[i+1] == "*":
+            return True, i
+    return False, -1
+
+
+def commentEndInLine(line):
+    for i in range(len(line)-1):
+        if line[i] == "*" and line[i+1] == ")":
+            return True, i
+    return False, -1
 
 
 class DependencyBear(LocalBear):
+    BEAR_DEPS = {RemoveComments}
     LANGUAGES = {'Ocaml'}
+
     AUTHORS = {'VYD'}
     AUTHORS_EMAILS = {'avatsal38@gmail.com'}
     MAINTAINERS = {'VYD'}
     MAINTAINERS_EMAILS = {'avatsal38@gmail.com'}
     CAN_DETECT = {'Extra string operations'}
 
-    def run(self, filename, file, language: language = Language['Ocaml']):
+    def run(self, filename, file, dependency_results, language: language = Language['Ocaml']):
         """
 
         Give result for undeclared function of lists.
@@ -35,10 +52,27 @@ class DependencyBear(LocalBear):
                        r"[^\.]*(filter)", r"[^\.]*(fold_right2)"]
 
         # iterating on all the lines in the ocaml src code file
+        newFile = []
+        # print(file)
+        flag = False
+        for line in file:
+            if not flag:
+                booStart, indStart = commentStartInLine(line)
+                booEnd, indEnd = commentEndInLine(line)
+                if booStart and not booEnd:
+                    flag = True
+                elif booStart and booEnd:
+                    flag = False
+                else:
+                    newFile.append(line)
+            else:
+                boo, ind = commentEndInLine(line)
+                if boo:
+                    flag = False
         res = []
         errors = []
         final = ""
-        for line_no, line in enumerate(file):
+        for line_no, line in enumerate(newFile):
 
             # print("line_no = ",line_no)
             # print("line = ",line)

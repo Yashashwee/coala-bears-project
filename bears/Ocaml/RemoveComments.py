@@ -10,32 +10,36 @@ def commentStartInLine(line):
     for i in range(len(line)-1):
         if line[i] == "(" and line[i+1] == "*":
             return True, i
-        else:
-            False, -1
+    return False, -1
 
 
 def commentEndInLine(line):
     for i in range(len(line)-1):
         if line[i] == "*" and line[i+1] == ")":
             return True, i
-        else:
-            False, -1
+    return False, -1
 
 
 class RemoveComments(LocalBear):
     def run(self, filename, file, language: language = Language['Ocaml']):
+
         newFile = []
+        # print(file)
         flag = False
         for line in file:
-            if flag:
-                boo, ind = commentStartInLine(line)
-                if boo:
+            if not flag:
+                booStart, indStart = commentStartInLine(line)
+                booEnd, indEnd = commentEndInLine(line)
+                if booStart and not booEnd:
                     flag = True
+                elif booStart and booEnd:
+                    flag = False
                 else:
                     newFile.append(line)
             else:
                 boo, ind = commentEndInLine(line)
                 if boo:
                     flag = False
+        # print(newFile)
 
         yield HiddenResult(self, [newFile])
