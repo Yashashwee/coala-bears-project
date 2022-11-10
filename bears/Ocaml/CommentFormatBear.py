@@ -3,7 +3,7 @@ from coalib.results.Result import Result
 from coalib.settings.Setting import language
 from coalib.bearlib.languages.Language import Language
 
-class comment_length_checker(LocalBear):
+class CommentFormatBear(LocalBear):
 	LANGUAGES={'Ocaml'}
 	AUTHORS={'VYD'}
 	AUTHORS_EMAILS={'avatsal38@gmail.com'}
