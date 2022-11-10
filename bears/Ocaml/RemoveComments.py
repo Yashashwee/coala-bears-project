@@ -3,7 +3,7 @@ from coalib.results.Result import Result
 from coalib.results.HiddenResult import HiddenResult
 from coalib.settings.Setting import language
 from coalib.bearlib.languages.Language import Language
-from coalib.results.RESULT_SEVERITY import RESULT_SEVERIT
+from coalib.results.RESULT_SEVERITY import RESULT_SEVERITY
 
 
 def commentStartInLine(line):
