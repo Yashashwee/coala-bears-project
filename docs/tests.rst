@@ -7,5 +7,7 @@ Ocaml Tests
    CommentLengthCheckerTest
    CommentFormatCheckerTest
    StringRepCheckerTest
+   TokenTest
+   DependencyChecker
 
    
