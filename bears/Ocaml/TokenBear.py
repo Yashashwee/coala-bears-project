@@ -1,14 +1,12 @@
+from coalib.bears.LocalBear import LocalBear
+from coalib.results.Result import Result
+from coalib.results.HiddenResult import HiddenResult
+from coalib.settings.Setting import language
+from coalib.bearlib.languages.Language import Language
 from lark import Lark
 from lark import Transformer
-
-
-class trans(Transformer):
-    # def exp(self, val):
-    #     # print("Debug", val)
-    #     return
-    def let(self, val):
-        print("Debug ", val)
-
+from coalib.results.RESULT_SEVERITY import RESULT_SEVERITY
+from coalib.results.Diff import Diff
 
 l = Lark(r"""?start: (exp ["\n"]*)+				
 
@@ -19,9 +17,8 @@ case: exp | exp "->" exp
 match:"match" var ["," var]* "with" case ["|" case]+
 INT: DIGIT+
 comment:"(*" word+ "*)"
-equal: "="
 inkey:"in"
-let:"let" [rec] fvar var* equal exp+ [inkey|";;"]
+let:"let" [rec] fvar var* "=" exp+ [inkey|";;"]
 var: /[a-z][a-zA-Z0-9]*/
 fvar: /[a-z][a-zA-Z0-9]*/
 bool: "true"|"false"
@@ -35,8 +32,8 @@ binop: var operators var | var operators INT | INT operators var | INT operators
 intarith: binop | binop operators binop | INT
 err: CAPITAL
 raise: "raise" err
-appf:fvar var+
-exp: comment| let | match | var | fvar | bool | intarith|appf
+appf: fvar var+
+exp: comment| let | match | var | fvar | bool | intarith | appf
 // Allow optional punctuation after each word
 word: WORD ["," | "!"]
 
@@ -46,12 +43,38 @@ word: WORD ["," | "!"]
 // Disregard spaces in text
 %ignore " "
 %ignore "\n"
-""")
-try:
-    parsedTree = l.parse(
-        "let fun3 x y = let newX = fun x in match newX with 10->20|1000->1000")
-    print(parsedTree.pretty())
-    print(trans().transform(parsedTree))
+%ignore "\t"   
+   
 
-except:
-    print(failed)
+""")
+# try:
+#     parsedTree = l.parse(
+#         "let fun3 x y = let newX fun x in match newX with 10->20|1000->1000")
+#     print(parsedTree.pretty())
+# except:
+#     print(failed)
+
+
+class TokenBear(LocalBear):
+
+    def run(self, filename, file, language: language = Language['Ocaml']):
+        """
+
+        HelperBear to return tokens for a file
+
+        :param language: Programming language of the source code written.
+
+        """
+        data = ""
+
+        for line_no, line in enumerate(file):
+            data = data + " " + line
+        # print(data)
+        # print("called")
+        try:
+            parsed_tree = l.parse(data)
+
+            yield HiddenResult(self, [parsed_tree, parsed_tree.pretty()])
+
+        except:
+            yield HiddenResult(self, ["Cannot parse"])
