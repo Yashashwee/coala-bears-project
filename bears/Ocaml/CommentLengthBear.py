@@ -32,6 +32,8 @@ class CommentLengthBear(LocalBear):
             
             # if the line is a single line comment
             temp=len(comment)
+            if temp<=1:
+                continue
             if comment[0]=='(' and comment[1]=='*' and comment[temp-2]==')' and comment[temp-3]=='*':
                 length=len(comment)
                 if length-1>mw+6:
