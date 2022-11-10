@@ -56,7 +56,7 @@ word: WORD ["," | "!"]
 
 
 class TokenBear(LocalBear):
-
+    LANGUAGES={'Ocaml'}
     def run(self, filename, file, language: language = Language['Ocaml']):
         """
 
