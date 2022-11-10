@@ -59,7 +59,7 @@ from bears.Ocaml.TokenBear import (TokenBear)
 
 class TokenOcamlBear(LocalBear):
     BEAR_DEPS = {TokenBear}
-
+    LANGUAGES={'Ocaml'}
     def run(self, filename, file, dependency_results, language: language = Language['Ocaml']):
         """
 
