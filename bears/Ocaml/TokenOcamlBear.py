@@ -5,6 +5,7 @@ from coalib.settings.Setting import language
 from coalib.bearlib.languages.Language import Language
 from lark import Lark
 from lark import Transformer
+from coalib.results.RESULT_SEVERITY import RESULT_SEVERITY
 
 l = Lark(r"""?start: (exp ["\n"]*)+				
 
@@ -31,7 +32,7 @@ intarith: binop | binop operators binop | INT
 err: CAPITAL
 raise: "raise" err
 appf: fvar var+
-exp: comment| let | match | var | fvar | bool | intarith|appf
+exp: comment| let | match | var | fvar | bool | intarith | appf
 // Allow optional punctuation after each word
 word: WORD ["," | "!"]
 
@@ -40,7 +41,8 @@ word: WORD ["," | "!"]
 
 // Disregard spaces in text
 %ignore " "
-%ignore "\n"   
+%ignore "\n"
+%ignore "\t"   
    
 
 """)
@@ -65,14 +67,14 @@ class OtherBear(LocalBear):
         data = ""
 
         for line_no, line in enumerate(file):
-            data = data + line
-
+            data = data + " " + line
+        print(data)
         try:
             parsed_tree = l.parse(data)
-            yield Result.from_values(origin=self,message='Following is parsed tree:\n {}'.format(parsed_tree.pretty()),file=filename)
-        
+            yield Result.from_values(origin=self, message='Following is parsed tree:\n {}'.format(parsed_tree.pretty()), file=filename)
+
         except:
-            yield Result.from_values(origin=self,message='Cannot Parse the code',file=filename)
+            yield Result.from_values(origin=self, message='Cannot Parse the code', file=filename, severity=RESULT_SEVERITY.NORMAL)
 
 
 # from coalib.bears.LocalBear import LocalBear
