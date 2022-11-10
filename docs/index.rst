@@ -15,13 +15,25 @@ Welcome to the coala-bears documentation!
 =========================================
 
 .. toctree::
-   :caption: Home
-   :hidden:
+   :maxdepth: 2
+   :caption: Intro:
 
-   Welcome <self>
+   introduction
+
+
+
 
 .. toctree::
-   :caption: API Documentation
-   :hidden:
+   :maxdepth: 2
+   :caption: Bears:
 
-   List of Modules<API/modules>
+   modules
+
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Tests:
+
+   tests
+
